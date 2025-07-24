@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Guia Visual para Habilitar sua UEx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-step {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .flowchart-line::after {
+            content: '→';
+            font-size: 2rem;
+            color: #0077B6;
+            margin: 0 1rem;
+        }
+        .flowchart-line-mobile::after {
+            content: '↓';
+            font-size: 2rem;
+            color: #0077B6;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-[#CAF0F8]">
+
+    <!-- Palette Name: Brilliant Blues -->
+    <!-- Plan Narrative & Structure:
+        1. Header: Engaging title.
+        2. Section 1 (What is a UEx?): Define the core concept using a Donut Chart to show relationships.
+        3. Section 2 (The 4 Steps): Use an HTML/CSS Flow Chart to visualize the main process.
+        4. Section 3 (Detailing the Journey): Use a Bar Chart to compare the complexity of the steps.
+        5. Section 4 (Manager's Checklist): Use styled cards for the final checklist.
+        6. Footer: Concluding message.
+    -->
+    <!-- Visualization Selection:
+        - UEx Relationship -> Goal: Inform -> Visualization: Donut Chart (Chart.js). Justification: Shows UEx as a central connector. NO SVG.
+        - 4-Step Process -> Goal: Organize -> Visualization: Flow Chart (HTML/CSS with Tailwind). Justification: Best for sequential processes. NO SVG, NO MERMAID JS.
+        - Step Complexity -> Goal: Compare -> Visualization: Bar Chart (Chart.js). Justification: Ideal for comparing categories. NO SVG.
+        - Final Checklist -> Goal: Organize -> Visualization: Styled Cards (HTML/CSS with Tailwind). Justification: More scannable and engaging than a list. NO SVG.
+    -->
+    <!-- Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#004E89]">Desvendando a Burocracia</h1>
+            <p class="text-xl text-[#0077B6] mt-2">O Guia Visual para Habilitar sua Unidade Executora (UEx)</p>
+        </header>
+
+        <main>
+            <section id="what-is-uex" class="mb-16">
+                <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-[#004E89] mb-4">O que é uma UEx?</h2>
+                            <p class="text-gray-700 mb-4">
+                                Antes de iniciar a jornada, é fundamental entender sua identidade. A Unidade Executora (UEx) é a entidade de direito privado, como uma Associação de Pais e Mestres (APM), que atua como o braço direito da escola. Ela é a ponte que conecta os recursos do governo às necessidades da comunidade escolar.
+                            </p>
+                            <p class="text-gray-700">
+                                Este gráfico ilustra a posição central da UEx, recebendo fundos do FNDE (Fundo Nacional de Desenvolvimento da Educação) para aplicar diretamente em melhorias na escola.
+                            </p>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="uexRoleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="the-path" class="mb-16">
+                <h2 class="text-3xl font-bold text-[#004E89] text-center mb-2">O Caminho do Tesouro</h2>
+                <p class="text-lg text-[#0077B6] text-center mb-8">Siga os 4 passos essenciais para a habilitação e cadastro da sua UEx.</p>
+                
+                <div class="hidden md:flex flex-wrap justify-center items-center">
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-52 h-48 flex flex-col justify-center items-center">
+                        <div class="text-4xl mb-2">📜</div>
+                        <h3 class="font-bold text-[#004E89]">1. Formalização</h3>
+                        <p class="text-sm text-gray-600">Criação do Estatuto e obtenção do CNPJ.</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-52 h-48 flex flex-col justify-center items-center">
+                        <div class="text-4xl mb-2">🗳️</div>
+                        <h3 class="font-bold text-[#004E89]">2. Eleição</h3>
+                        <p class="text-sm text-gray-600">Formação da diretoria em assembleia.</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-52 h-48 flex flex-col justify-center items-center">
+                        <div class="text-4xl mb-2">🏦</div>
+                        <h3 class="font-bold text-[#004E89]">3. Conta Bancária</h3>
+                        <p class="text-sm text-gray-600">Abertura de conta específica para a UEx.</p>
+                    </div>
+                    <div class="flowchart-line"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-52 h-48 flex flex-col justify-center items-center">
+                        <div class="text-4xl mb-2">💻</div>
+                        <h3 class="font-bold text-[#004E89]">4. Cadastro</h3>
+                        <p class="text-sm text-gray-600">Atualização dos dados no PDDEWeb.</p>
+                    </div>
+                </div>
+
+                <div class="flex md:hidden flex-col items-center">
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-full max-w-xs mb-4">
+                        <div class="text-4xl mb-2">📜</div>
+                        <h3 class="font-bold text-[#004E89]">1. Formalização</h3>
+                        <p class="text-sm text-gray-600">Criação do Estatuto e obtenção do CNPJ.</p>
+                    </div>
+                    <div class="flowchart-line-mobile"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-full max-w-xs mb-4">
+                        <div class="text-4xl mb-2">🗳️</div>
+                        <h3 class="font-bold text-[#004E89]">2. Eleição</h3>
+                        <p class="text-sm text-gray-600">Formação da diretoria em assembleia.</p>
+                    </div>
+                    <div class="flowchart-line-mobile"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-full max-w-xs mb-4">
+                        <div class="text-4xl mb-2">🏦</div>
+                        <h3 class="font-bold text-[#004E89]">3. Conta Bancária</h3>
+                        <p class="text-sm text-gray-600">Abertura de conta específica para a UEx.</p>
+                    </div>
+                    <div class="flowchart-line-mobile"></div>
+                    <div class="flowchart-step bg-white rounded-lg shadow-md p-6 text-center w-full max-w-xs">
+                        <div class="text-4xl mb-2">💻</div>
+                        <h3 class="font-bold text-[#004E89]">4. Cadastro</h3>
+                        <p class="text-sm text-gray-600">Atualização dos dados no PDDEWeb.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="journey-details" class="mb-16">
+                 <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container h-80 md:h-96">
+                            <canvas id="stepComplexityChart"></canvas>
+                        </div>
+                         <div>
+                            <h2 class="text-3xl font-bold text-[#004E89] mb-4">Detalhando a Jornada</h2>
+                            <p class="text-gray-700 mb-4">
+                                Cada passo da jornada tem sua própria complexidade. A formalização inicial, envolvendo cartórios e a Receita Federal, geralmente demanda mais tempo e atenção aos detalhes.
+                            </p>
+                            <p class="text-gray-700">
+                                O gráfico ao lado oferece uma estimativa do nível de esforço relativo para cada etapa, ajudando no planejamento e na alocação de tempo para que o processo ocorra sem surpresas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="checklist" class="mb-16">
+                <h2 class="text-3xl font-bold text-[#004E89] text-center mb-2">Checklist do Gestor</h2>
+                <p class="text-lg text-[#0077B6] text-center mb-8">Garanta que você tem todos os itens necessários para o sucesso!</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">CNPJ Ativo e Regular</h3>
+                            <p class="text-sm text-gray-600">A "identidade" da sua UEx.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Estatuto Social Registrado</h3>
+                            <p class="text-sm text-gray-600">As "regras do jogo" da associação.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Ata da Diretoria Atual</h3>
+                            <p class="text-sm text-gray-600">Comprova os responsáveis legais.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Conta Bancária Específica</h3>
+                            <p class="text-sm text-gray-600">Canal para receber os recursos.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Cadastro no PDDEWeb</h3>
+                            <p class="text-sm text-gray-600">Sua "presença online" para o FNDE.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center">
+                        <span class="text-3xl mr-4">✅</span>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Certidões Negativas (CND)</h3>
+                            <p class="text-sm text-gray-600">Prova de que está em dia com as obrigações.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 py-8 border-t border-[#90E0EF]">
+            <h3 class="text-2xl font-bold text-[#004E89]">🏆 Missão Cumprida!</h3>
+            <p class="text-gray-700 mt-2">Parabéns! Com este guia, você está pronto para transformar a burocracia em melhorias para sua escola.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const tooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const uexRoleCtx = document.getElementById('uexRoleChart').getContext('2d');
+        new Chart(uexRoleCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['FNDE (Governo)', 'Escola', 'Recursos'],
+                datasets: [{
+                    label: 'Papel da UEx',
+                    data: [33, 33, 33],
+                    backgroundColor: ['#0077B6', '#48CAE4', '#90E0EF'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#004E89',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'A UEx no Centro de Tudo',
+                        color: '#004E89',
+                        font: {
+                            size: 18,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+
+        const stepComplexityCtx = document.getElementById('stepComplexityChart').getContext('2d');
+        new Chart(stepComplexityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Formalização', 'Eleição', 'Conta Bancária', 'Cadastro Web'],
+                datasets: [{
+                    label: 'Nível de Esforço Estimado',
+                    data: [9, 5, 6, 4],
+                    backgroundColor: ['#004E89', '#0077B6', '#48CAE4', '#90E0EF'],
+                    borderColor: '#004E89',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                           color: '#004E89'
+                        }
+                    },
+                    y: {
+                         grid: {
+                            display: false
+                        },
+                        ticks: {
+                           color: '#004E89'
+                        }
+                    }
+                },
+                plugins: {
+                    ...tooltipCallback.plugins,
+                    legend: {
+                        display: false
+                    },
+                     title: {
+                        display: true,
+                        text: 'Complexidade Relativa dos Passos',
+                        color: '#004E89',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
